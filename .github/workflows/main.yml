@@ -19,18 +19,22 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@master
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
+      - name: Checkout first
+        id: checkout
+        uses: actions/checkout@master
 
-    - name: Colab Badge Action
-      uses: trsvchn/colab-badge-action@v2
-      with:
-        github_token: ${{ secrets.TKN }}
-        check: 'all'
-        update: true
-        target_branch: master
+      - name: Add/Update badges
+        id: badges
+        uses: trsvchn/colab-badge-action@v3
+        with:
+          check: 'all'
+          update: true
+          target_branch: master
+          target_repository: ggasbarri/data-science-portfolio
 
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.TKN }}
