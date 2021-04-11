@@ -27,7 +27,7 @@ jobs:
       run: echo Hello, world!
 
     - name: Colab Badge Action
-      uses: trsvchn/colab-badge-action@v2
+      uses: trsvchn/colab-badge-action@v3
       with:
         github_token: ${{ secrets.TKN }}
         check: 'all'
